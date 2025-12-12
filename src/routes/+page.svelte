@@ -1,30 +1,19 @@
 <script lang="ts">
+	import { generateTeams as generate } from '$lib/teamLogic';
+
 	let names = $state('');
 	let teamCount = $state(2);
 	let teams: string[][] = $state([]);
 
 	function generateTeams() {
-		teams = Array.from({ length: teamCount }, () => []);
-		const nameList = names
-			.split('\n')
-			.map((name) => name.trim())
-			.filter((name) => name);
-
-		while (nameList.length) {
-			for (let i = 0; i < teamCount; i++) {
-				if (nameList.length === 0) break;
-				const randomIndex = Math.floor(Math.random() * nameList.length);
-				const selectedName = nameList.splice(randomIndex, 1)[0];
-				teams[i].push(selectedName);
-			}
-		}
+		teams = generate(names, teamCount);
 	}
 
-    function reset(){
-        names = '';
-        teamCount = 2;
-        teams = [];
-    }
+	function reset() {
+		names = '';
+		teamCount = 2;
+		teams = [];
+	}
 </script>
 
 <main class="mx-auto max-w-4xl p-4 md:p-12">
