@@ -27,48 +27,50 @@
     }
 </script>
 
-<main class="mx-auto max-w-2xl border border-red-400 p-8">
-	<h1 class="mb-2 text-center text-2xl font-bold">Cage Team Generator</h1>
+<main class="mx-auto max-w-4xl p-4 md:p-12">
+	<h1 class="mb-4 text-center text-2xl font-bold md:text-4xl">Cage Team Generator</h1>
 
 	<textarea
 		bind:value={names}
 		placeholder="Enter names (one per line)"
-		class="h-40 w-full rounded border p-2"
+		class="h-40 w-full rounded border p-3 text-base md:h-56 md:p-4 md:text-lg"
 	></textarea>
 
-	<div class="my-4 flex gap-4">
+	<div class="my-4 flex flex-wrap items-center gap-4 text-base md:my-6 md:gap-6 md:text-lg">
 		<span>Number of teams:</span>
 		{#each [2, 3, 4] as count}
-			<label class="flex items-center gap-1">
-				<input type="radio" name="teamCount" value={count} bind:group={teamCount} />
+			<label class="flex cursor-pointer items-center gap-2 rounded border px-4 py-2 text-lg md:px-5 md:py-2 md:text-xl {teamCount === count ? 'bg-blue-500 text-white' : 'bg-white'}">
+				<input type="radio" name="teamCount" value={count} bind:group={teamCount} class="hidden" />
 				{count}
 			</label>
 		{/each}
 	</div>
 
-	<button
-		onclick={generateTeams}
-		class="rounded bg-blue-500 px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-50"
-		disabled={names.trim().length === 0}
-	>
-		Generate Teams
-	</button>
-    
-    <button
-        onclick={reset}
-        class="rounded bg-red-500 px-4 py-2 text-white"
-    >
-        Reset
-    </button>
+	<div class="flex w-full gap-3 md:w-auto">
+		<button
+			onclick={generateTeams}
+			class="flex-7 rounded bg-blue-500 px-4 py-3 text-base text-white disabled:cursor-not-allowed disabled:opacity-50 md:flex-none md:px-6 md:py-3 md:text-lg"
+			disabled={names.trim().length === 0}
+		>
+			Generate Teams
+		</button>
+
+		<button
+			onclick={reset}
+			class="flex-3 rounded bg-red-500 px-4 py-3 text-base text-white md:flex-none md:px-6 md:py-3 md:text-lg"
+		>
+			Reset
+		</button>
+	</div>
 
 	{#if teams.length > 0}
-		<div class="mt-6 grid grid-cols-2 gap-4">
+		<div class="mt-6 grid grid-cols-1 gap-4 md:mt-8 md:grid-cols-2 md:gap-6">
 			{#each teams as team, i}
-				<div class="rounded border p-4">
-					<h2 class="font-bold">Team {i + 1}</h2>
-					<ul>
+				<div class="rounded border p-4 md:p-6">
+					<h2 class="mb-2 text-lg font-bold md:text-xl">Team {i + 1}</h2>
+					<ul class="text-base md:text-lg">
 						{#each team as member}
-							<li>{member}</li>
+							<li class="py-1">{member}</li>
 						{/each}
 					</ul>
 				</div>
