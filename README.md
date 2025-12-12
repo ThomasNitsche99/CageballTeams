@@ -1,3 +1,3 @@
 # Cageball Team Generator
 
-By SnusMimRunken with ❤️
+By Snusmimrunken with ❤️
